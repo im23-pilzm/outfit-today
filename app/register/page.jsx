@@ -36,35 +36,36 @@ export default function RegisterPage() {
 
     return (
         <>
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center mt-25">
                 <Image
                     src="/hanger.png"
                     alt="HangerIcon"
                     height={31}
                     width={31}
                 />
-                <p>OutfitToday</p>
+                <p className="ml-4 font-semibold">OutfitToday</p>
             </div>
 
-            <div className="flex justify-center items-center">
-                <form onSubmit={handleSubmit} className="border-2 border-[#4C2B08] rounded-lg p-8 w-3xl">
-                    <div className="flex flex-col items-center justify-center gap-4">
-                        <div className="flex flex-col items-center justify-center gap-4">
-                            <div className="flex flex-col items-center justify-center">
-                                <label htmlFor="email" className="self-start w-full text-left">Email</label>
-                                <input type="email" name="email" required className="border-2 border-[#4C2B08] rounded-lg py-1" />
+            <div className="flex justify-center items-center mt-12 text-[#4C2B08]">
+                <form onSubmit={handleSubmit} className="border-3 border-[#4C2B08] rounded-lg p-8 w-1xl">
+                    <p className="flex justify-center items-center text-center mb-8 font-semibold">Neu hier?<br />Registriere dich hier!</p>
+                    <div className="flex flex-col items-center justify-center">
+                        <div className="flex flex-col items-center justify-center gap-6">
+                            <div className="flex flex-col items-center justify-center w-78">
+                                <label htmlFor="email" className="self-start w-full text-left text-sm font-semibold">Email</label>
+                                <input type="email" name="email" required className="border-[1.5] border-[#4C2B08] rounded-lg py-1 w-full" />
                             </div>
-                            <div className="flex flex-col items-center justify-center">
-                                <label  htmlFor="password" className="self-start w-full text-left">Passwort</label>
-                                <input type="password" name="password" required className="border-2 border-[#4C2B08] rounded-lg py-1" />
+                            <div className="flex flex-col items-center justify-center w-78">
+                                <label htmlFor="password" className="self-start w-full text-left text-sm font-semibold">Passwort</label>
+                                <input type="password" name="password" required className="border-[1.5] border-[#4C2B08] rounded-lg py-1 w-full" />
                             </div>
-                            <div className="flex flex-col items-center justify-center">
-                                <label htmlFor="password_conf" className="self-start w-full text-left">Passwort bestätigen</label>
-                                <input type="password" name="password_conf" required className="border-2 border-[#4C2B08] rounded-lg py-1" />
+                            <div className="flex flex-col items-center justify-center w-78">
+                                <label htmlFor="password_conf" className="self-start w-full text-left text-sm font-semibold">Passwort bestätigen</label>
+                                <input type="password" name="password_conf" required className="border-[1.5] border-[#4C2B08] rounded-lg py-1 w-full" />
                             </div>
                         </div>
                         <button
-                            className="px-8 py-3 bg-[#4C2B08] text-[#FAF9F6] flex items-center gap-2 rounded-full transition duration-150 hover:bg-[#6B3F13] group"
+                            className="px-8 py-3 bg-[#4C2B08] text-[#FAF9F6] flex items-center gap-2 rounded-full transition duration-150 hover:bg-[#6B3F13] group mt-10"
                             type="submit"
                         >
                             Registrieren
@@ -79,7 +80,14 @@ export default function RegisterPage() {
                                 <path fillRule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
                             </svg>
                         </button>
+                        <p className="mt-12 text-xs">
+                            Schon registriert?
+                            <Link href="/login" className="text-blue-600 hover:underline">
+                                Anmelden
+                            </Link>
+                        </p>
                     </div>
+
                 </form>
             </div>
 
