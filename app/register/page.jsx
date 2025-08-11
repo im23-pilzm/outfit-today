@@ -20,17 +20,30 @@ export default function RegisterPage() {
             return
         }
 
-        const response = await fetch("/api/auth/login", {
-            method: "POST",
-            headers: { "ContentType": "application/json" },
-            body: JSON.stringify({ email, password, password_conf })
-        });
+        try {
+            console.log('Sending registration request...');
+            const response = await fetch("/api/auth/register", {
+                method: "POST",
+                headers: { 
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ 
+                    email, 
+                    password 
+                })
+            });
 
-        if (response.ok) {
-            router.push("/new_profile")
-        } else {
-            const errorData = await response.json();
-            alert(errorData.message || "Registration failed. Please try again.");
+            const data = await response.json();
+            console.log('Response:', data);
+
+            if (response.ok) {
+                router.push("/new_profile");
+            } else {
+                alert(data.error || "Registration failed. Please try again.");
+            }
+        } catch (error) {
+            console.error('Error during registration:', error);
+            alert("An error occurred during registration. Please try again.");
         }
     }
 
