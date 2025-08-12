@@ -37,7 +37,7 @@ export default function RegisterPage() {
             console.log('Response:', data);
 
             if (response.ok) {
-                router.push("/new_profile");
+                router.push("/wardrobe");
             } else {
                 alert(data.error || "Registration failed. Please try again.");
             }

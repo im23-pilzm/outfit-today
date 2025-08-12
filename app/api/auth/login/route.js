@@ -2,11 +2,10 @@ import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import jwt from "jsonwebtoken";
 import prisma from '../../../../lib/prisma';
-import { error } from 'console';
 
 export async function POST(request) {
     try {
-        const body = request.body;
+        const body = await request.json();
         const { email, password } = body
 
 
@@ -42,7 +41,7 @@ export async function POST(request) {
                 userId: user.id,
                 email: user.email
             },
-            JWT_SECRET,
+            process.env.JWT_SECRET,
             { expiresIn: "30d" }
         );
 

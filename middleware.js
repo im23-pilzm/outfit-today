@@ -10,8 +10,15 @@ export async function middleware(request) {
         "/",
         "/api/auth/login",
         "/api/auth/register",
-        "/api/auth/logout"
-    ]
+        "/api/auth/logout",
+        "/_next",
+        "/favicon.ico",
+        "/hanger.png"
+    ];
+
+    if (publicPaths.some(path => request.nextUrl.pathname.startsWith(path))) {
+        return NextResponse.next();
+    }
 
     if (publicPaths.includes(request.nextUrl.pathname)) {
         return NextResponse.next();
@@ -42,3 +49,15 @@ export async function middleware(request) {
         return NextResponse.redirect(new URL("/login", request.url))
     }
 }
+
+export const config = {
+    matcher: [
+        /*
+         * Match all request paths except:
+         * - _next/static (static files)
+         * - _next/image (image optimization files)
+         * - favicon.ico (favicon file)
+         */
+        '/((?!_next/static|_next/image|favicon.ico).*)',
+    ]
+};

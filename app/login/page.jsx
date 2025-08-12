@@ -33,7 +33,7 @@ export default function LoginPage() {
             console.log('Response:', data);
 
             if (response.ok) {
-                router.push("/new_profile");
+                router.push("/wardrobe");
             } else {
                 setError(data.error || "Login failed. Please try again.");
             }
