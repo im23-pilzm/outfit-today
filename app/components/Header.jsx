@@ -12,8 +12,8 @@ export default function Header() {
     
     const navItems = [
         { href: '/outfits', label: 'Outfits' },
-        { href: '/wardrobe', label: 'Wardrobe' },
-        { href: '/profile', label: 'Profile' },
+        { href: '/wardrobe', label: 'Kleiderschrank' },
+        { href: '/profile', label: 'Profil' },
     ];
 
     useEffect(() => {
@@ -29,12 +29,12 @@ export default function Header() {
     return (
         <>
             <motion.header
-                className="fixed top-0 w-full bg-[#FAF9F6] text-[#4C2B08] p-4 z-50"
+                className="fixed top-0 w-full bg-[#FAF9F6] text-[#4C2B08] py-4 z-50"
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.5 }}
             >
-                <nav className="flex justify-between items-center max-w-7xl mx-auto">
+                <nav className="flex justify-between items-center px-20 mx-auto">
                     <div className="flex justify-center items-center">
                         <Image
                             src="/hanger.png"
