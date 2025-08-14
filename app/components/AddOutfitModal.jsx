@@ -18,21 +18,25 @@ export default function AddOutfitModal({ isOpen, onClose, category }) {
         setError(null);
 
         try {
-            const submitData = new FormData();
-            submitData.append("name", formData.name);
-            submitData.append("brand", formData.name);
-            submitData.append("color", formData.name);
-            submitData.append("size", formData.name);
-            submitData.append("category", formData.name);
-            submitData.append("image", formData.name);
+            const submissionData = new FormData();
+            submissionData.append("name", formData.name);
+            submissionData.append("brand", formData.brand);
+            submissionData.append("color", formData.color);
+            submissionData.append("size", formData.size);
+            submissionData.append("category", category);
+
+            if (formData.image instanceof File) {
+                submissionData.append('image', formData.image);
+            }
 
             const response = await fetch("/api/wardrobe", {
                 method: "POST",
-                body: submitData
+                body: submissionData
             });
 
             if (!response.ok) {
-                throw new Error("Failed to add item")
+                const errorData = await response.json();
+                throw new Error(errorData.error || "Failed to add item")
             }
 
             setFormData({

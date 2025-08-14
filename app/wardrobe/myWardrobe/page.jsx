@@ -50,7 +50,7 @@ export default function MyWardrobePage() {
                         </SwiperSlide>
                         <SwiperSlide className="aspect-square rounded-lg border-2 border-dashed border-[#4C2B08]">
                             <button
-                                onClick={() => handleAddOutfit('shoes')}
+                                onClick={() => handleAddOutfit('headwear')}
                                 className="w-full h-full flex flex-col justify-center items-center text-[#4C2B08] hover:bg-[#4C2B08]/5 transition-colors duration-200"
                             >
                                 <Plus size={48} />
@@ -78,7 +78,7 @@ export default function MyWardrobePage() {
                         </SwiperSlide>
                         <SwiperSlide className="aspect-square rounded-lg border-2 border-dashed border-[#4C2B08]">
                             <button
-                                onClick={() => handleAddOutfit('shoes')}
+                                onClick={() => handleAddOutfit('top')}
                                 className="w-full h-full flex flex-col justify-center items-center text-[#4C2B08] hover:bg-[#4C2B08]/5 transition-colors duration-200"
                             >
                                 <Plus size={48} />
@@ -106,7 +106,7 @@ export default function MyWardrobePage() {
                         </SwiperSlide>
                         <SwiperSlide className="aspect-square rounded-lg border-2 border-dashed border-[#4C2B08]">
                             <button
-                                onClick={() => handleAddOutfit('shoes')}
+                                onClick={() => handleAddOutfit('bottom')}
                                 className="w-full h-full flex flex-col justify-center items-center text-[#4C2B08] hover:bg-[#4C2B08]/5 transition-colors duration-200"
                             >
                                 <Plus size={48} />
