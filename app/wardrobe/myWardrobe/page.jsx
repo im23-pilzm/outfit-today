@@ -3,16 +3,30 @@ import React, { useRef, useState } from 'react';
 import { Plus } from 'react-feather';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
+import OutfitCard from '../../components/OutfitCard';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
+import AddOutfitModal from '../../components/AddOutfitModal';
 
 export default function MyWardrobePage() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedCategory, setSelectCategory] = useState(null);
 
     const handleAddOutfit = (category) => {
-        console.log(`Adding new outfit to ${category}`);
-    }
+        setSelectCategory(category);
+        setIsModalOpen(true);
+    };
+
+    const sampleOutfit = {
+        image: "/tshirt.png",
+        brand: "Nike",
+        color: "Schwarz",
+        size: "M",
+        category: "Oberteile"
+    };
+
 
     return (
         <>
@@ -29,20 +43,14 @@ export default function MyWardrobePage() {
                         style={{ height: 'auto' }}
                     >
                         <SwiperSlide className="aspect-square bg-gray-100 rounded-lg">
-                            <div className="p-4 text-center h-full flex flex-col justify-center items-center">
-                                <h3 className="text-xl font-semibold mb-2">Outfit 1</h3>
-                                {/* Add your outfit content here */}
-                            </div>
+                            <OutfitCard {...sampleOutfit} />
                         </SwiperSlide>
                         <SwiperSlide className="aspect-square bg-gray-100 rounded-lg">
-                            <div className="p-4 text-center h-full flex flex-col justify-center items-center">
-                                <h3 className="text-xl font-semibold mb-2">Outfit 1</h3>
-                                {/* Add your outfit content here */}
-                            </div>
+                            <OutfitCard {...sampleOutfit} />
                         </SwiperSlide>
                         <SwiperSlide className="aspect-square rounded-lg border-2 border-dashed border-[#4C2B08]">
                             <button
-                                onClick={() => handleAddOutfit('hats')}
+                                onClick={() => handleAddOutfit('shoes')}
                                 className="w-full h-full flex flex-col justify-center items-center text-[#4C2B08] hover:bg-[#4C2B08]/5 transition-colors duration-200"
                             >
                                 <Plus size={48} />
@@ -63,20 +71,14 @@ export default function MyWardrobePage() {
                         style={{ height: 'auto' }}
                     >
                         <SwiperSlide className="aspect-square bg-gray-100 rounded-lg">
-                            <div className="p-4 text-center h-full flex flex-col justify-center items-center">
-                                <h3 className="text-xl font-semibold mb-2">Outfit 1</h3>
-                                {/* Add your outfit content here */}
-                            </div>
+                            <OutfitCard {...sampleOutfit} />
                         </SwiperSlide>
                         <SwiperSlide className="aspect-square bg-gray-100 rounded-lg">
-                            <div className="p-4 text-center h-full flex flex-col justify-center items-center">
-                                <h3 className="text-xl font-semibold mb-2">Outfit 1</h3>
-                                {/* Add your outfit content here */}
-                            </div>
+                            <OutfitCard {...sampleOutfit} />
                         </SwiperSlide>
                         <SwiperSlide className="aspect-square rounded-lg border-2 border-dashed border-[#4C2B08]">
                             <button
-                                onClick={() => handleAddOutfit('tops')}
+                                onClick={() => handleAddOutfit('shoes')}
                                 className="w-full h-full flex flex-col justify-center items-center text-[#4C2B08] hover:bg-[#4C2B08]/5 transition-colors duration-200"
                             >
                                 <Plus size={48} />
@@ -97,20 +99,14 @@ export default function MyWardrobePage() {
                         style={{ height: 'auto' }}
                     >
                         <SwiperSlide className="aspect-square bg-gray-100 rounded-lg">
-                            <div className="p-4 text-center h-full flex flex-col justify-center items-center">
-                                <h3 className="text-xl font-semibold mb-2">Outfit 1</h3>
-                                {/* Add your outfit content here */}
-                            </div>
+                            <OutfitCard {...sampleOutfit} />
                         </SwiperSlide>
                         <SwiperSlide className="aspect-square bg-gray-100 rounded-lg">
-                            <div className="p-4 text-center h-full flex flex-col justify-center items-center">
-                                <h3 className="text-xl font-semibold mb-2">Outfit 1</h3>
-                                {/* Add your outfit content here */}
-                            </div>
+                            <OutfitCard {...sampleOutfit} />
                         </SwiperSlide>
                         <SwiperSlide className="aspect-square rounded-lg border-2 border-dashed border-[#4C2B08]">
                             <button
-                                onClick={() => handleAddOutfit('pants')}
+                                onClick={() => handleAddOutfit('shoes')}
                                 className="w-full h-full flex flex-col justify-center items-center text-[#4C2B08] hover:bg-[#4C2B08]/5 transition-colors duration-200"
                             >
                                 <Plus size={48} />
@@ -131,16 +127,10 @@ export default function MyWardrobePage() {
                         style={{ height: 'auto' }}
                     >
                         <SwiperSlide className="aspect-square bg-gray-100 rounded-lg">
-                            <div className="p-4 text-center h-full flex flex-col justify-center items-center">
-                                <h3 className="text-xl font-semibold mb-2">Outfit 1</h3>
-                                {/* Add your outfit content here */}
-                            </div>
+                            <OutfitCard {...sampleOutfit} />
                         </SwiperSlide>
                         <SwiperSlide className="aspect-square bg-gray-100 rounded-lg">
-                            <div className="p-4 text-center h-full flex flex-col justify-center items-center">
-                                <h3 className="text-xl font-semibold mb-2">Outfit 1</h3>
-                                {/* Add your outfit content here */}
-                            </div>
+                            <OutfitCard {...sampleOutfit} />
                         </SwiperSlide>
                         <SwiperSlide className="aspect-square rounded-lg border-2 border-dashed border-[#4C2B08]">
                             <button
@@ -155,6 +145,11 @@ export default function MyWardrobePage() {
                     </Swiper>
                 </div>
             </div>
+            <AddOutfitModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                category={selectedCategory}
+            />
         </>
     );
 }

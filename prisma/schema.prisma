@@ -9,9 +9,31 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id             String          @id @default(cuid())
+  email          String          @unique
+  password       String
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  clothingPieces ClothingPiece[] // Add this relation field
+}
+
+model ClothingPiece {
+  id          Int      @id @default(autoincrement())
+  image       String   // URL/path to image
+  name        String
+  brand       String?
+  color       String
+  size        String
+  category    Category
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userId      String   
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+enum Category {
+  HEADWEAR
+  TOP
+  BOTTOM
+  SHOES
 }
