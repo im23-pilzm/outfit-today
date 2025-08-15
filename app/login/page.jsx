@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { FormEvent, useState } from 'react'
+import { signIn } from "next-auth/react";
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
@@ -18,34 +19,27 @@ export default function LoginPage() {
 
         try {
             console.log('Sending login request...');
-            const response = await fetch("/api/auth/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    email,
-                    password
-                })
+            const result = await signIn("credentials", {
+                email,
+                password,
+                redirect: false
             });
 
-            const data = await response.json();
-            console.log('Response:', data);
-
-            if (response.ok) {
-                router.push("/wardrobe");
+            if (result.error) {
+                setError("Login fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.");
             } else {
-                setError(data.error || "Login failed. Please try again.");
+                router.push("/wardrobe");
+                router.refresh();
             }
         } catch (error) {
             console.error('Error during login:', error);
-            setError("An error occurred during login. Please try again.");
+            setError("Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."); 
         }
     }
     return (
         <>
             <div className="flex justify-center items-center mt-35">
-                <Image  
+                <Image
                     src="/hanger.png"
                     alt="HangerIcon"
                     height={31}

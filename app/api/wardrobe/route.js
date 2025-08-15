@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { v2 as cloudinary } from 'cloudinary';
 import prisma from '../../../lib/prisma';
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../auth/[...nextauth]/route";
 import { CldOgImage } from 'next-cloudinary';
 import { error } from 'console';
 import { resolve } from 'path';
@@ -15,6 +17,13 @@ cloudinary.config({
 
 export async function POST(request) {
     try {
+        const session = await getServerSession(authOptions);
+
+        if (!session) {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+
+        const userId = session.user.id;
         const receivedFormData = await request.formData();
 
         console.log('Received form data:', Object.fromEntries(receivedFormData));
@@ -55,6 +64,18 @@ export async function POST(request) {
                     uploadStream.end(uint8Array);
                 });
             });
+
+            await prisma.clothingPiece.create({
+                data: {
+                    image: uploadResponse.secure_url,
+                    name,
+                    brand: receivedFormData.get("brand") || null,
+                    color,
+                    size,
+                    category,
+                    userId
+                }
+            })
 
             return NextResponse.json({
                 message: "Upload successful",
