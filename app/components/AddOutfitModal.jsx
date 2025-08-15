@@ -23,7 +23,7 @@ export default function AddOutfitModal({ isOpen, onClose, category }) {
             submissionData.append("brand", formData.brand);
             submissionData.append("color", formData.color);
             submissionData.append("size", formData.size);
-            submissionData.append("category", category);
+            submissionData.append("category", category.toUpperCase());
 
             if (formData.image instanceof File) {
                 submissionData.append('image', formData.image);

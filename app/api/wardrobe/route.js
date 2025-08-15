@@ -26,6 +26,8 @@ export async function POST(request) {
         const userId = session.user.id;
         const receivedFormData = await request.formData();
 
+
+
         console.log('Received form data:', Object.fromEntries(receivedFormData));
 
         const image = receivedFormData.get("image");
@@ -37,6 +39,11 @@ export async function POST(request) {
         const color = receivedFormData.get('color');
         const size = receivedFormData.get('size');
         const category = receivedFormData.get('category');
+        if (!['HEADWEAR', 'TOP', 'BOTTOM', 'SHOES'].includes(category)) {
+            return NextResponse.json({
+                error: `Invalid category. Must be one of: HEADWEAR, TOP, BOTTOM, SHOES`
+            }, { status: 400 });
+        }
 
         const missing = [];
 
@@ -63,6 +70,16 @@ export async function POST(request) {
                     const uint8Array = new Uint8Array(buffer);
                     uploadStream.end(uint8Array);
                 });
+            });
+
+            console.log('Upload successful, attempting database save with:', {
+                image: uploadResponse.secure_url,
+                name,
+                brand: receivedFormData.get("brand") || null,
+                color,
+                size,
+                category,
+                userId
             });
 
             await prisma.clothingPiece.create({
