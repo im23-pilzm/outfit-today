@@ -9,9 +9,10 @@ export default withAuth({
 
 export const config = {
     matcher: [
-        '/wardrobe',
+        '/wardrobe/:path*',
         '/api/wardrobe/:path*',
-        // Add any other protected routes here
-        '/((?!api/auth|login|register|_next/static|_next/image|favicon.ico|hanger.png).*)'
+        '/profile/:path*',
+        // Exclude home, auth routes, and static assets
+        '/((?!|api/auth|login|register|_next/static|_next/image|favicon.ico|hanger.png).*)'
     ]
 };

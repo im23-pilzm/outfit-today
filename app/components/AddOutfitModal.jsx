@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function AddOutfitModal({ isOpen, onClose, category }) {
+export default function AddOutfitModal({ isOpen, onClose, category, onAdd }) {
     const [formData, setFormData] = useState({
         name: '',
         brand: '',
@@ -19,6 +19,7 @@ export default function AddOutfitModal({ isOpen, onClose, category }) {
 
         try {
             const submissionData = new FormData();
+
             submissionData.append("name", formData.name);
             submissionData.append("brand", formData.brand);
             submissionData.append("color", formData.color);
@@ -34,6 +35,9 @@ export default function AddOutfitModal({ isOpen, onClose, category }) {
                 body: submissionData
             });
 
+            const data = await response.json();
+            console.log("New clothing piece: ", data.clothingPiece)
+
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.error || "Failed to add item")
@@ -46,14 +50,17 @@ export default function AddOutfitModal({ isOpen, onClose, category }) {
                 size: "",
                 image: null,
             });
+
+            if (onAdd) {
+                onAdd(data.clothingPiece)
+            }
+
             onClose();
         } catch (err) {
             setError(err.message);
         } finally {
             setIsLoading(false);
         }
-
-
     };
 
     if (!isOpen) return null;

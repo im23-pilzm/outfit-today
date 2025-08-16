@@ -82,7 +82,7 @@ export async function POST(request) {
                 userId
             });
 
-            await prisma.clothingPiece.create({
+            const newClothingPiece = await prisma.clothingPiece.create({
                 data: {
                     image: uploadResponse.secure_url,
                     name,
@@ -96,14 +96,7 @@ export async function POST(request) {
 
             return NextResponse.json({
                 message: "Upload successful",
-                imageUrl: uploadResponse.secure_url,
-                data: {
-                    name: receivedFormData.get('name'),
-                    brand: receivedFormData.get('brand'),
-                    color: receivedFormData.get('color'),
-                    size: receivedFormData.get('size'),
-                    category: receivedFormData.get('category')
-                }
+                clothingPiece: newClothingPiece
             })
 
         } catch (uploadError) {

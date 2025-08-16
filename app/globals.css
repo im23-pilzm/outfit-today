@@ -38,3 +38,12 @@ body {
 .transform-style-preserve-3d {
   transform-style: preserve-3d;
 }
+
+.swiper-slide {
+    height: 100% !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: #4C2B08 !important;
+}
