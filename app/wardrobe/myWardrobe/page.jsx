@@ -36,7 +36,7 @@ export default function MyWardrobePage() {
 
     return (
         <>
-            <div className="min-h-screen bg-[#FFF8F0]">
+            <div className="min-h-screen bg-[var(--background)">
                 <div className="container mx-auto px-4 py-8 space-y-12">
                     {/* Headwear section */}
                     <div className="flex justify-start items-center gap-8">

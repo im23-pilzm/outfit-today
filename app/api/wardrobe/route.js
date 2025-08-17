@@ -3,10 +3,6 @@ import { v2 as cloudinary } from 'cloudinary';
 import prisma from '../../../lib/prisma';
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]/route";
-import { CldOgImage } from 'next-cloudinary';
-import { error } from 'console';
-import { resolve } from 'path';
-import { rejects } from 'assert';
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
