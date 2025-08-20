@@ -14,7 +14,27 @@ model User {
   password       String
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
-  clothingPieces ClothingPiece[] // Add this relation field
+  clothingPieces ClothingPiece[]
+  profile        UserProfile?    // Add this relation field
+}
+
+model UserProfile {
+  id                String   @id @default(cuid())
+  userId            String   @unique
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Profile preferences from your form
+  favoriteStyle     String?  // casual, streetwear, sporty, etc.
+  favoriteColor1    String?  // schwarz, weiss, grau, etc.
+  favoriteColor2    String?  // second color choice
+  favoriteBottom    String?  // jeans, chinos, jogginghose, etc.
+  favoriteTop       String?  // t-shirt, hoodie, pullover, etc.
+  favoriteShoes     String?  // sneaker, boots, sandalen, etc.
+  favoriteMaterial  String?  // baumwolle, leinen, wolle, etc.
+  profileImage      String?  // URL/path to profile image
+  displayName       String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 }
 
 model ClothingPiece {
